@@ -2,6 +2,11 @@
   "extends": "@electron-toolkit/tsconfig/tsconfig.node.json",
   "include": ["electron.vite.config.*", "src/main/**/*", "src/preload/**/*"],
   "compilerOptions": {
+    "moduleResolution": "bundler",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "allowJs": true,         // important pour JS modules comme @vitejs/plugin-vue
+    "skipLibCheck": true,
     "composite": true,
     "types": ["electron-vite/node"]
   }
