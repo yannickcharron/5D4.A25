@@ -2,6 +2,7 @@ import './assets/style.css'
 
 import { createApp } from 'vue'
 import router from './router'
+import axiosPlugin from './plugins/api'
 import App from './App.vue'
 
 //FontAwesome
@@ -17,4 +18,8 @@ const app = createApp(App)
 app.component('FontAwesomeIcon', FontAwesomeIcon)
 
 app.use(router)
+app.use(axiosPlugin, {
+  key: 'Mockoon',
+  baseURL: 'http://localhost:3001'
+})
 app.mount('#app')
