@@ -28,8 +28,10 @@
     "@fortawesome/vue-fontawesome": "^3.1.1",
     "@tailwindcss/vite": "^4.1.12",
     "axios": "^1.11.0",
+    "dayjs": "^1.11.18",
     "tailwindcss": "^4.1.12",
-    "vue-router": "^4.5.1"
+    "vue-router": "^4.5.1",
+    "vuetify": "^3.10.0"
   },
   "devDependencies": {
     "@electron-toolkit/eslint-config-prettier": "3.0.0",
