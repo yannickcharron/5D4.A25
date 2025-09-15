@@ -17,12 +17,18 @@ class AccountRepository {
     }
 
     async create(account) {
-        //TODO:
+        try {
+            account.passwordHash = await argon.hash(account.password);
+            delete account.password;
+            return Account.create(account);
+        } catch(err) {
+            throw err;
+        }
     }
 
 
-    retrieveByBase64(base64) {
-        const retrieveQuery = Account.findOne({ base64: base64 });
+    retrieveByUUID(uuid) {
+        const retrieveQuery = Account.findOne({ uuid: uuid });
         return retrieveQuery;
     }
 
@@ -43,11 +49,11 @@ class AccountRepository {
     }
 
     transform(account) {
-        account.href = `${process.env.BASE_URL}/accounts/${account.base64}`;
+        account.href = `${process.env.BASE_URL}/accounts/${account.uuid}`;
 
         delete account._id;
         delete account.__v;
-        delete account.base64;
+        delete account.uuid;
         delete account.password;
         delete account.passwordHash;
 

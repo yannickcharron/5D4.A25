@@ -13,12 +13,19 @@ import accountsValidator from '../validators/accounts.validator.js';
 const router = express.Router();
 
 router.post('/', accountsValidator.postValidator(), validator, post);
-router.get('/:base64', retrieveOne);
-router.get('/:base64/expenses', retrieveExpenseForAccount);
+router.get('/:uuid', retrieveOne);
+router.get('/:uuid/expenses', retrieveExpenseForAccount);
 
 async function post(req, res, next) {
     try {
-        //TODO:
+        let account = await accountRepository.create(req.body);
+        account = account.toObject({ getters: false, virtuals: false });
+        account = accountRepository.transform(account);
+
+        //TODO: JWT TOKENS
+
+        res.status(201).json(account);
+
     } catch (err) {
         return next(err);
     }
@@ -26,7 +33,7 @@ async function post(req, res, next) {
 
 async function retrieveOne(req, res, next) {
     try {
-        let account = await accountRepository.retrieveByBase64(req.params.base64);
+        let account = await accountRepository.retrieveByUUID(req.params.uuid);
         if (!account) {
             return next(HttpErrors.NotFound());
         } else {

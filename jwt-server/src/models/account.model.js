@@ -1,8 +1,14 @@
 import mongoose from 'mongoose';
+import crypto from 'crypto';
 
 const accountSchema = mongoose.Schema(
     {
-
+        username: { type: String, required: true, unique: true},
+        email: { type: String, required:true, unique: true},
+        firstName: { type: String, required: true },
+        lastName: { type: String, required: true },
+        uuid: { type: String, required: true, unique: true, default: () => crypto.randomUUID() },
+        passwordHash: { type: String, required: true }
     },
     {
         collection: 'accounts',
