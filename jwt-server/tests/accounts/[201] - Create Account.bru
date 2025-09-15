@@ -1,0 +1,20 @@
+meta {
+  name: [201] - Create Account
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{base_url}}/accounts/
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+      "email":"bank@cstj.qc.ca",
+      "firstName":"PrenomTest",
+      "lastName":"NomTest",
+      "password":"123456"
+  }
+}

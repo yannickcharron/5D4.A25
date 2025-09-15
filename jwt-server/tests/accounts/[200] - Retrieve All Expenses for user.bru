@@ -1,0 +1,19 @@
+meta {
+  name: [200] - Retrieve All Expenses for user
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{base_url}}/accounts/:base64/expenses
+  body: none
+  auth: bearer
+}
+
+params:path {
+  base64: JLL-gSPm5fz5AlB3_m5Ssg
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imp1bGllQGNzdGoucWMuY2EiLCJiYXNlNjQiOiJKTEwtZ1NQbTVmejVBbEIzX201U3NnIiwiaWF0IjoxNzU3NjAxNTU3LCJleHAiOjE3NTc2MDUxNTcsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6NTAwMCJ9.dvivLohAM356LeBCGTo9i1SNG0rYUPWmGZbNKQNLVj4
+}

@@ -1,0 +1,21 @@
+meta {
+  name: [204] - Invalidate
+  type: http
+  seq: 8
+}
+
+delete {
+  url: {{base_url}}/tokens/
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: _M8eOUJOXXKUUB9lToPWBp8TnxGyA6HQ4GCzzb2xNZc
+}
+
+body:json {
+  {
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3QyQGNzdGoucWMuY2EiLCJpYXQiOjE3NTc2MDA2MDcsImV4cCI6MTc1NzY4NzAwNywiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo1MDAwIn0.xjIyFoTsrS3esLbtmLAE46NWXlYhrDeLU3GBZPsnyS4"
+  }
+}

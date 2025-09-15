@@ -1,0 +1,21 @@
+meta {
+  name: [204] - Logout
+  type: http
+  seq: 2
+}
+
+delete {
+  url: {{base_url}}/sessions/
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3QyQGNzdGoucWMuY2EiLCJpYXQiOjE3NTc2MDA1NDcsImV4cCI6MTc1NzYwNDE0NywiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo1MDAwIn0.dKLHpsDoSnmNELVZ3lOTCgXR-JVyklVQP4GLcP1qRtc
+}
+
+body:json {
+  {
+    "refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3QyQGNzdGoucWMuY2EiLCJpYXQiOjE3NTc2MDA1MzcsImV4cCI6MTc1NzY4NjkzNywiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo1MDAwIn0.t3t-OUBO16YjDrIq1wFpvA4R3LiMi42KD2AS2i-cwg0"
+  }
+}

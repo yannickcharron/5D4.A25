@@ -1,0 +1,18 @@
+meta {
+  name: [200] - Login
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{base_url}}/sessions
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+      "email":"julie@cstj.qc.ca",
+      "password":"123456"
+  }
+}

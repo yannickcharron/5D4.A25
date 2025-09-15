@@ -1,0 +1,23 @@
+meta {
+  name: [201] - Refresh
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{base_url}}/tokens
+  body: json
+  auth: none
+}
+
+headers {
+  client_id: dev.yannick
+  client_secret: Xoki1Ztd2MyWL9k7YehorVVkdwkJdw4H
+  base64: nrBcYtVtbX7nBh65e0qUBQ
+}
+
+body:json {
+  {
+    "refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJhbmtAY3N0ai5xYy5jYSIsImlhdCI6MTc1NzQ0Nzc1OSwiZXhwIjoxNzU3NTM0MTU5LCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjUwMDAifQ.rf6o14n5txsE-YBQwK53mJwPbvsLROb_6jI6nEXAGxQ"
+  }
+}

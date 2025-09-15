@@ -1,0 +1,24 @@
+meta {
+  name: [201] - Create Expense
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{base_url}}/expenses
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imp1bGllQGNzdGoucWMuY2EiLCJiYXNlNjQiOiJKTEwtZ1NQbTVmejVBbEIzX201U3NnIiwiaWF0IjoxNzU3NjAyODcxLCJleHAiOjE3NTc2MDY0NzEsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6NTAwMCJ9.TcmcRMTdh03Ir7f6IgubgDLqgNP39kb79ValviE6IpM
+}
+
+body:json {
+  {
+    "amount": 335.06,
+      "category": "Épargne & Investissements 💰",
+      "date": "2025-09-11",
+      "description": "Test Bruno"
+  }
+}
