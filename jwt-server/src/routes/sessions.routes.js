@@ -4,7 +4,7 @@ import HttpErrors from 'http-errors';
 import accountRepository from '../repositories/account.repository.js';
 
 import TokenController from '../controllers/token.controller.js';
-const tokenController = new TokenController()
+const tokenController = new TokenController();
 
 import { guardAuthorizationJWT, revokeAuthorization } from '../middlewares/authorization.jwt.js';
 
@@ -14,15 +14,28 @@ router.post('/', login);
 router.delete('/', logout);
 
 async function login(req, res, next) {
-    //TODO:
+    try {
+        const { credential, password } = req.body;
+
+        let account = await accountRepository.login(credential, password);
+
+        account = account.toObject({ getters: false, virtuals: false });
+        account = accountRepository.transform(account);
+
+        const tokens = accountRepository.generateJWT(account.uuid);
+
+        res.status(201).json({ account, tokens });
+    } catch (err) {
+        return next(err);
+    }
 }
 
 async function logout(req, res, next) {
     try {
-       //TODO:
-    } catch(err) {
+        //TODO:
+    } catch (err) {
         return next(err);
-    } 
+    }
 }
 
 export default router;

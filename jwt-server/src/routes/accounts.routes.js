@@ -22,10 +22,9 @@ async function post(req, res, next) {
         account = account.toObject({ getters: false, virtuals: false });
         account = accountRepository.transform(account);
 
-        //TODO: JWT TOKENS
+        const tokens = accountRepository.generateJWT(account.uuid);
 
-        res.status(201).json(account);
-
+        res.status(201).json({ account, tokens });
     } catch (err) {
         return next(err);
     }

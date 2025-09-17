@@ -7,13 +7,22 @@ import parseDuration from 'parse-duration';
 import { Account } from '../models/account.model.js';
 
 class AccountRepository {
+    async login(credential, password) {
+        const account = await this.retrieveByCredentials(credential);
+        if (!account) {
+            //Email non présent en base de données
+            throw HttpErrors.Unauthorized();
+        }
 
-    async login(email, password) {
-        //TODO:
+        if (!(await this.validatePassword(password, account))) {
+            throw HttpErrors.Unauthorized();
+        }
+
+        return account;
     }
 
     async validatePassword(password, account) {
-        //TODO:
+        return await argon.verify(account.passwordHash, password);
     }
 
     async create(account) {
@@ -21,11 +30,10 @@ class AccountRepository {
             account.passwordHash = await argon.hash(account.password);
             delete account.password;
             return Account.create(account);
-        } catch(err) {
+        } catch (err) {
             throw err;
         }
     }
-
 
     retrieveByUUID(uuid) {
         const retrieveQuery = Account.findOne({ uuid: uuid });
@@ -40,8 +48,20 @@ class AccountRepository {
         return Account.findOne({ email: email });
     }
 
-    generateJWT(email, base64) {
-        //TODO:
+    retrieveByCredentials(credential) {
+        return Account.findOne({ $or: [{ email: credential }, { username: credential }] });
+    }
+
+    generateJWT(uuid) {
+        const access = jwt.sign({ uuid: uuid }, 
+            process.env.JWT_TOKEN_SECRET, 
+            {
+                expiresIn: process.env.JWT_TOKEN_LIFE,
+                issuer: process.env.BASE_URL
+            }
+        );
+
+        return { access };
     }
 
     async validateRefreshToken(email, headerBase64) {
