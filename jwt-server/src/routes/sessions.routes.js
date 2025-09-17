@@ -19,10 +19,11 @@ async function login(req, res, next) {
 
         let account = await accountRepository.login(credential, password);
 
+        const tokens = accountRepository.generateJWT(account.uuid);
+        
         account = account.toObject({ getters: false, virtuals: false });
         account = accountRepository.transform(account);
 
-        const tokens = accountRepository.generateJWT(account.uuid);
 
         res.status(201).json({ account, tokens });
     } catch (err) {

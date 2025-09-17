@@ -19,10 +19,11 @@ router.get('/:uuid/expenses', retrieveExpenseForAccount);
 async function post(req, res, next) {
     try {
         let account = await accountRepository.create(req.body);
+        const tokens = accountRepository.generateJWT(account.uuid);
+        
         account = account.toObject({ getters: false, virtuals: false });
         account = accountRepository.transform(account);
 
-        const tokens = accountRepository.generateJWT(account.uuid);
 
         res.status(201).json({ account, tokens });
     } catch (err) {
