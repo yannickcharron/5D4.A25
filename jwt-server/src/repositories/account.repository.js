@@ -60,8 +60,16 @@ class AccountRepository {
                 issuer: process.env.BASE_URL
             }
         );
+        const refresh = jwt.sign({ uuid },
+            process.env.JWT_REFRESH_SECRET,
+            {
+                expiresIn: process.env.JWT_REFRESH_LIFE,
+                issuer: process.env.BASE_URL
+            }
+        );
+        const expiresIn = parseDuration(process.env.JWT_TOKEN_LIFE);
 
-        return { access };
+        return { access, refresh, expiresIn };
     }
 
     async validateRefreshToken(email, headerBase64) {

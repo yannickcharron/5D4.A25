@@ -11,12 +11,14 @@ const tokenController = new TokenController()
 
 const router = express.Router();
 
-router.post('/', refresh);
+router.post('/', guardRefreshTokenJWT, refresh);
 
 async function refresh(req, res, next) {
 
     try {
-        //TODO:
+        const tokens = accountRepository.generateJWT(req.refresh.uuid);
+        res.status(201).json(tokens);
+
     } catch (err) {
         return next(err);
     }
