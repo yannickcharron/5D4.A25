@@ -10,7 +10,18 @@ class TokenRepository {
     }
 
     async isRevoked(token) {
-        //TODO:
+        try {
+            const tokenInDB = await RevokedToken.findOne({ token: token });
+
+            if(!tokenInDB) {
+                return false;
+            }
+
+            return true;
+
+        } catch(err) {
+            throw err;
+        }
     }
 }
 

@@ -1,3 +1,4 @@
+import HttpErrors from 'http-errors';
 import tokenRepository from '../repositories/token.repository.js';
 
 export default class TokenController {
@@ -7,7 +8,10 @@ export default class TokenController {
 
     async invalidate(token) {
         try {
-           //TODO:
+           const revokedToken = await tokenRepository.invalidate(token);
+           if(!revokedToken) {
+            throw HttpErrors.Unauthorized();
+           }
         } catch (err) {
             throw err;
         }

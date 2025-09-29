@@ -11,7 +11,7 @@ import { guardAuthorizationJWT, revokeAuthorization } from '../middlewares/autho
 const router = express.Router();
 
 router.post('/', login);
-router.delete('/', logout);
+router.delete('/', guardAuthorizationJWT, revokeAuthorization, logout);
 
 async function login(req, res, next) {
     try {
@@ -33,7 +33,9 @@ async function login(req, res, next) {
 
 async function logout(req, res, next) {
     try {
-        //TODO:
+        await tokenController.invalidate(req.body.refreshToken);
+        res.status(204).end();
+
     } catch (err) {
         return next(err);
     }

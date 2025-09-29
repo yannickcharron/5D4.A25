@@ -15,9 +15,20 @@ const guardRefreshTokenJWT = expressjwt({
     requestProperty: 'refresh',
     getToken: (req) => {
         return req.body.refreshToken
+    },
+    isRevoked: (req) => {
+        return tokenRepository.isRevoked(req.body.refreshToken);
     }
 })
 
-const revokeAuthorization = {};
+const revokeAuthorization = expressjwt({
+    secret: process.env.JWT_REFRESH_SECRET,
+    issuer: process.env.BASE_URL,
+    algorithms: ['HS256'],
+    requestProperty: 'refresh',
+    getToken: (req) => {
+        return req.body.refreshToken
+    }
+});
 
 export { guardAuthorizationJWT, guardRefreshTokenJWT, revokeAuthorization };
